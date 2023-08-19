@@ -1,13 +1,29 @@
 /* eslint-disable react/prop-types */
-import React,{ useState } from 'react'
+import React,{ useEffect, useRef, useState } from 'react'
 import './navbar.css'
 
 const Navbar = ({groupBy, orderBy, setGroupBy, setOrderBy, change}) => {
-  const [noDisplay, setNoDisplay] = useState(true)
+  const [open, setOpen] = useState(false)
 
-  const displayGroupBy = () =>{
-    setNoDisplay(!noDisplay)
+  let menuRef = useRef();
+  let btnRef = useRef();
+
+  const handleChange =() =>{
+    setOpen((prev)=> !prev)
   }
+
+  useEffect(()=>{
+    let handler = (e)=>{
+      if(btnRef.current.contains(e.target)){
+        console.log("Button touched");
+      }else if(!menuRef.current.contains(e.target)){
+        setOpen(false)
+        console.log(e.target);
+      }else{
+      }
+    }
+    document.addEventListener("mousedown", handler)
+  })
 
   const handleGroup = (e) =>{
     setGroupBy(e.target.value)
@@ -24,9 +40,9 @@ const Navbar = ({groupBy, orderBy, setGroupBy, setOrderBy, change}) => {
   return (
     <nav className='navbar'>
       <ul>
-        <li>
-          <button className='display_btn' onClick={displayGroupBy}>
-          <i className="uil uil-sliders-v-alt"></i>
+        <li >
+          <button className='display_btn' onClick={handleChange} ref={btnRef}>
+          <i className="uil uil-sliders-v-alt" ></i>
             Display
             <i className="uil uil-angle-up"></i>
             <i className="uil uil-angle-down"></i>
@@ -34,26 +50,25 @@ const Navbar = ({groupBy, orderBy, setGroupBy, setOrderBy, change}) => {
         </li>
       </ul>
 
-      {!noDisplay && 
-      <div className='group-by'>
-      <ul>
-        <li>
-          Grouping
-          <select name="groupBy" id="groupBy" value={groupBy} onChange={handleGroup}>
-            <option value="status">Status</option>
-            <option value="user">User</option>
-            <option value="priority">Priority</option>
-          </select>
-        </li>
-        <li>
-          Ordering
-          <select name="orderBy" id="orderBy" value={orderBy} onChange={handleOrder}>
-            <option value="priority">Priority</option>
-            <option value="title">Title</option>
-          </select>
-        </li>
-      </ul>
-    </div>}
+      <div className={open? 'group-by': 'group-by hide'} ref={menuRef}>
+            <ul>
+              <li>
+                Grouping
+                <select name="groupBy" id="groupBy" value={groupBy} onChange={handleGroup}>
+                  <option value="status">Status</option>
+                  <option value="user">User</option>
+                  <option value="priority">Priority</option>
+                </select>
+              </li>
+              <li>
+                Ordering
+                <select name="orderBy" id="orderBy" value={orderBy} onChange={handleOrder}>
+                  <option value="priority">Priority</option>
+                  <option value="title">Title</option>
+                </select>
+              </li>
+            </ul>
+          </div>
     </nav>
   )
 }
