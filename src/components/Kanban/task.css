@@ -42,9 +42,11 @@
     border-radius: 7px;
     box-shadow: 0 1px 10px rgb(0 0 0 / 0.1);
     padding: 1rem;
-
     position: relative;
+}
 
+.card:hover{
+    box-shadow: 0 1px 10px rgb(0 0 0 / 0.3);
 }
 
 .avatar {
@@ -79,7 +81,7 @@
 }
   
 .avatar.active::after {
-    border: 0.3rem solid gold;
+    border: 0.3rem solid greenyellow;
 }
 
 .card .title{
