@@ -3,7 +3,7 @@ import React from 'react';
 import Card from './Card';
 import './task.css'
 
-const TaskContainer = ({title,cards,orderBy}) => {
+const TaskContainer = ({title,cards,orderBy,users}) => {
 
   // console.log(cards[0]);
 
@@ -27,7 +27,7 @@ const TaskContainer = ({title,cards,orderBy}) => {
   }
   cards = cards.map((value, index) => {
     return(
-      <Card key={index} value={value}/>
+      <Card key={index} value={value} users={users}/>
     )
   })
   
@@ -35,7 +35,11 @@ const TaskContainer = ({title,cards,orderBy}) => {
     <div className="task-container">
         <div className='header'>
           <div className='header_first'>
+          {/* <i className="uil uil-history"></i> */}
           <i className="uil uil-circle"></i>
+          {/* <i className="uil uil-adjust"></i>
+          <i className="uil uil-check-circle"></i>
+          <i className="uil uil-times-circle"></i> */}
 
             {title} 
             <span> {cards.length}</span>

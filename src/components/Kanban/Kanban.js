@@ -5,14 +5,14 @@ import TaskContainer from './task';
 
 
 
-const Kanban = ({val,cards, groupBy, orderBy}) => {
+const Kanban = ({val,cards, groupBy, orderBy, users}) => {
   let arr;
 
   if(groupBy === 'status'){
     arr = val.map((title, index) => {
-        let newCards = cards.filter((value) => value.status == title)
+        let newCards = cards.filter((value) => value.status === title)
         return(
-        <TaskContainer key={index} title={title} cards={newCards} orderBy={orderBy}/>
+        <TaskContainer key={index} title={title} cards={newCards} orderBy={orderBy} users={users}/>
         )
     })
   }else if(groupBy === 'priority'){
@@ -20,7 +20,7 @@ const Kanban = ({val,cards, groupBy, orderBy}) => {
     arr = val.map((title, index) => {
         let newCards = cards.filter((value) => ar[value.priority] === title)
         return(
-        <TaskContainer key={index} title={title} cards={newCards} orderBy={orderBy}/>
+        <TaskContainer key={index} title={title} cards={newCards} orderBy={orderBy} users={users}/>
         )
     })
     
@@ -28,7 +28,7 @@ const Kanban = ({val,cards, groupBy, orderBy}) => {
       arr = val.map((obj, index) => {
         let newCards = cards.filter((value) => value.userId === obj.id)
         return(
-        <TaskContainer key={index} title={obj.name} cards={newCards} orderBy={orderBy}/>
+        <TaskContainer key={index} title={obj.name} cards={newCards} orderBy={orderBy} users={users}/>
         )
     })
   }

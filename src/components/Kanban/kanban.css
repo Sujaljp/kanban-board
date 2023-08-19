@@ -5,3 +5,15 @@
     overflow-x: scroll;
 }
 
+@media (max-width: 880px) {
+    .kanban-container{
+        margin: 2rem 2rem 0 2rem;
+    }
+}
+
+@media (max-width: 460px) {
+    .kanban-container{
+        margin: 2rem 0.5rem 0 0.5rem;
+    }
+}
+

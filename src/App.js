@@ -67,13 +67,13 @@ function App() {
     if(groupBy==='user'){
       setPass(users)
     }
-  },[users])
+  },[groupBy, users])
 
   return (
     <>
       <div className='main_container'>
         <Navbar groupBy={groupBy} setGroupBy={setGroupBy} orderBy={orderBy} setOrderBy={setOrderBy} change={change}/>
-        {tickets && pass && <Kanban val={pass} cards={tickets} groupBy={groupBy} orderBy={orderBy}/>}
+        {tickets && pass && <Kanban val={pass} cards={tickets} users={users} groupBy={groupBy} orderBy={orderBy}/>}
       </div>
     </>
   )
